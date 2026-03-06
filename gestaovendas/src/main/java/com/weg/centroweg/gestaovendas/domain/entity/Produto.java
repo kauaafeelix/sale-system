@@ -32,4 +32,10 @@ public class Produto {
     private int quantidadeEstoque;
 
 
+    public Produto(String nome, String descricao, double preco, int quantidadeEstoque) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
 }

@@ -37,4 +37,13 @@ public class Pedido {
     @Enumerated (EnumType.STRING)
     private StatusPedido status;
 
+
+    public Pedido(UUID clienteId, UUID usuarioId, LocalDateTime dataPedido, double valorTotal, StatusPedido status) {
+        this.clienteId = clienteId;
+        this.usuarioId = usuarioId;
+        this.dataPedido = dataPedido;
+        this.valorTotal = valorTotal;
+        this.status = status;
+    }
+
 }
