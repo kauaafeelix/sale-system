@@ -1,11 +1,17 @@
 package com.weg.centroweg.gestaovendas.application.dto.cliente;
 
-import java.util.UUID;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 public record ClienteRequestDto(
-        UUID id,
+        @NotBlank (message = "O nome do cliente é obrigatório")
         String nome,
+
+        @Email
         String email,
+
+        @NotBlank (message = "O telefone do cliente é obrigatório")
         String telefone
 ) {
 }

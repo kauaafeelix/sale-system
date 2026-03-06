@@ -1,7 +1,11 @@
 package com.weg.centroweg.gestaovendas.application.dto.itempedido;
 
+import java.util.UUID;
+
 public record ItemPedidoRequestDto(
-        Long produtoId,
-        int quantidade
+        UUID pedidoId,
+        UUID produtoId,
+        int quantidade,
+        double precoUnitario
 ) {
 }
