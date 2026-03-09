@@ -8,7 +8,8 @@ public record ClienteRequestDto(
         @NotBlank (message = "O nome do cliente é obrigatório")
         String nome,
 
-        @Email
+        @Email (message = "O email do cliente deve ser válido")
+        @NotBlank(message = "O email do cliente é obrigatório")
         String email,
 
         @NotBlank (message = "O telefone do cliente é obrigatório")

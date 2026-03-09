@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gestaovendas.iml" filepath="$PROJECT_DIR$/.idea/gestaovendas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gestaovendas/gestaovendas.iml" filepath="$PROJECT_DIR$/gestaovendas/gestaovendas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sale-system.iml" filepath="$PROJECT_DIR$/.idea/sale-system.iml" />
     </modules>
   </component>
 </project>
