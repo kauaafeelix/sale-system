@@ -7,7 +7,6 @@ import com.weg.centroweg.gestaovendas.application.mapper.UsuarioMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioService;
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
