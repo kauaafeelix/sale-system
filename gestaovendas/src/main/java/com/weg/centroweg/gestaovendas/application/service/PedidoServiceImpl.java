@@ -7,6 +7,7 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.PedidoServic
 import com.weg.centroweg.gestaovendas.domain.entity.Pedido;
 import com.weg.centroweg.gestaovendas.domain.entity.enums.StatusPedido;
 import com.weg.centroweg.gestaovendas.domain.repository.PedidoRepository;
+import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public PedidoResponseDto buscarPorId(UUID id) {
 
-        Pedido pedido = repository.findById(id).orElseThrow(()-> new IllegalArgumentException("O Pedido não existe."));
+        Pedido pedido = repository.findById(id).orElseThrow(()-> new BusinessException("O Pedido não existe."));
 
         return mapper.toDto(pedido);
     }
@@ -69,14 +70,14 @@ public class PedidoServiceImpl implements PedidoService {
     public void cancelarPedido(UUID id) {
 
         Pedido pedido = repository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("O Pedido não existe."));
+                orElseThrow(()-> new BusinessException("O Pedido não existe."));
 
         if (pedido.getStatus() == StatusPedido.CANCELADO) {
-            throw new RuntimeException("Pedido já está cancelado");
+            throw new BusinessException("Pedido já está cancelado");
         }
 
         if (pedido.getStatus() == StatusPedido.ENVIADO) {
-            throw new RuntimeException("Pedido enviado não pode ser cancelado");
+            throw new BusinessException("Pedido enviado não pode ser cancelado");
         }
 
         pedido.setStatus(StatusPedido.CANCELADO);

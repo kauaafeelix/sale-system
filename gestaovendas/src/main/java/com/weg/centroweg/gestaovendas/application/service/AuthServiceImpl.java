@@ -10,6 +10,7 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioServi
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.entity.enums.RoleUsuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
+import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import com.weg.centroweg.gestaovendas.infra.secutiry.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
         UsuarioResponseDto usuario = usuarioService.criarUsuario(usuarioDto);
 
         Usuario entity = usuarioRepository.findByEmail(usuario.email())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
 
         String token = jwtService.gerarToken(entity);
         return new AuthResponse(token);

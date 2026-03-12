@@ -6,6 +6,7 @@ import com.weg.centroweg.gestaovendas.application.mapper.ClienteMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ClienteService;
 import com.weg.centroweg.gestaovendas.domain.entity.Cliente;
 import com.weg.centroweg.gestaovendas.domain.repository.ClienteRepository;
+import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteResponseDto buscarPorId(UUID id) {
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
 
         return mapper.toDto(cliente);
     }
@@ -49,7 +50,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteResponseDto atualizarCliente(UUID id, ClienteRequestDto request) {
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
 
         cliente.setNome(request.nome());
         cliente.setEmail(request.email());
@@ -63,7 +64,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void deletarCliente(UUID id) {
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
 
         repository.deleteById(id);
     }

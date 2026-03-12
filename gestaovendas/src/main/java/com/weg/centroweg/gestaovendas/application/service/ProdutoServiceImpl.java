@@ -6,6 +6,7 @@ import com.weg.centroweg.gestaovendas.application.mapper.ProdutoMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ProdutoService;
 import com.weg.centroweg.gestaovendas.domain.entity.Produto;
 import com.weg.centroweg.gestaovendas.domain.repository.ProdutoRepository;
+import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public ProdutoResponseDto buscarPorId(UUID id) {
         Produto produto = repository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("O Produto não existe."));
+                orElseThrow(()-> new BusinessException("O Produto não existe."));
 
         return mapper.toDto(produto);
     }
@@ -58,7 +59,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoResponseDto atualizarProduto(UUID id, ProdutoRequestDto request) {
-        Produto produto = repository.findById(id).orElseThrow(()-> new IllegalArgumentException("O Produto não existe."));
+        Produto produto = repository.findById(id).orElseThrow(()-> new BusinessException("O Produto não existe."));
 
         produto.setNome(request.nome());
         produto.setDescricao(request.descricao());
@@ -72,7 +73,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public void deletarProduto(UUID id) {
-        Produto produto = repository.findById(id).orElseThrow(()-> new IllegalArgumentException("O Produto não existe."));
+        Produto produto = repository.findById(id).orElseThrow(()-> new BusinessException("O Produto não existe."));
 
         repository.deleteById(id);
     }
@@ -80,7 +81,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public void atualizarEstoque(UUID produtoId, int quantidade) {
         Produto produto = repository.findById(produtoId)
-                .orElseThrow(() -> new IllegalArgumentException("O Produto não existe."));
+                .orElseThrow(() -> new BusinessException("O Produto não existe."));
 
         int novoEstoque = produto.getQuantidadeEstoque() + quantidade;
         if (novoEstoque < 0) {
