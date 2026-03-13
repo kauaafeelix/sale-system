@@ -7,7 +7,7 @@ import com.weg.centroweg.gestaovendas.application.mapper.UsuarioMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioService;
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
-import lombok.RequiredArgsConstructor;
+import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto request) {
 
         if (usuarioRepository.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("Email já cadastrado");
+            throw new BusinessException("Email já cadastrado");
         }
 
         Usuario usuario = mapper.toEntity(request);
@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return usuarioRepository.findById(id)
                 .map(mapper::toDto)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+                .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDto atualizarUsuario(UUID id, UsuarioRequestDto request) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+                .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
 
         usuario.setNome(request.nome());
         usuario.setEmail(request.email());
@@ -81,7 +81,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void deletarUsuario(UUID id) {
 
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+                .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
 
         usuarioRepository.deleteById(id);
     }
