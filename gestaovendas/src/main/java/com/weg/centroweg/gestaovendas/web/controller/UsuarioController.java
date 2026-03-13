@@ -6,6 +6,7 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioServi
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<UsuarioResponseDto>save(@Valid @RequestBody UsuarioRequestDto request){
 
