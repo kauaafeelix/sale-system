@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 request.nome(),
                 request.email(),
                 request.senha(),
-                RoleUsuario.VENDEDOR
+                request.role()
                 );
 
         UsuarioResponseDto usuario = usuarioService.criarUsuario(usuarioDto);
