@@ -23,7 +23,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<UsuarioResponseDto>save(@Valid @RequestBody UsuarioRequestDto request){
 
