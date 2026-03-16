@@ -1,10 +1,10 @@
 package com.weg.centroweg.gestaovendas.application.dto.usuario;
 
 import com.weg.centroweg.gestaovendas.domain.entity.enums.RoleUsuario;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record UsuarioRequestDto(
 
@@ -20,6 +20,14 @@ public record UsuarioRequestDto(
         String senha,
 
         @NotNull (message = "O papel do usuário é obrigatório")
-        RoleUsuario role
+        RoleUsuario role,
+
+        @NotNull(message = "A data de criação do usuário é obrigatória")
+        @FutureOrPresent(message = "A data de criação do usuário não pode ser no passado")
+        LocalDateTime dataCriacao,
+
+        @NotNull(message = "O ID do usuário que criou este usuário é obrigatório")
+        @Positive(message = "O ID do usuário que criou este usuário deve ser um número positivo")
+        UUID criadoPor
 ) {
 }

@@ -4,6 +4,7 @@ import com.weg.centroweg.gestaovendas.domain.entity.enums.RoleUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -29,10 +30,18 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private RoleUsuario role;
 
-    public Usuario(String nome, String email, String senha, RoleUsuario role) {
+    @Column(nullable = false)
+    private LocalDateTime dataCriacao;
+
+    @Column(nullable = false)
+    private UUID criadoPor;
+
+    public Usuario(String nome, String email, String senha, RoleUsuario role, LocalDateTime dataCriacao, UUID criadoPor) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.role = role;
+        this.dataCriacao = dataCriacao;
+        this.criadoPor = criadoPor;
     }
 }
