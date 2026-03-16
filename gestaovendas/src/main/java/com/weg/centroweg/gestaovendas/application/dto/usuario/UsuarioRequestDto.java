@@ -27,7 +27,6 @@ public record UsuarioRequestDto(
         LocalDateTime dataCriacao,
 
         @NotNull(message = "O ID do usuário que criou este usuário é obrigatório")
-        @Positive(message = "O ID do usuário que criou este usuário deve ser um número positivo")
         UUID criadoPor
 ) {
 }
