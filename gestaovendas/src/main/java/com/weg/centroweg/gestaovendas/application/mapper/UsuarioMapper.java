@@ -13,7 +13,6 @@ public class UsuarioMapper {
       return new Usuario(
                 dto.nome(),
                 dto.email(),
-                dto.senha(),
                 dto.role()
       );
     }
@@ -23,7 +22,11 @@ public class UsuarioMapper {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getRole()
+                usuario.getRole(),
+                usuario.getDataCriacao(),
+                usuario.getCriadoPor() != null ?
+                        usuario.getCriadoPor().getId()
+                        : null
         );
     }
 
