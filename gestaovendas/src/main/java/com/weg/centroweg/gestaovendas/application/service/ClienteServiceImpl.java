@@ -7,21 +7,18 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.ClienteServi
 import com.weg.centroweg.gestaovendas.domain.entity.Cliente;
 import com.weg.centroweg.gestaovendas.domain.repository.ClienteRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository repository;
     private final ClienteMapper mapper;
-
-    public ClienteServiceImpl(ClienteRepository repository, ClienteMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public ClienteResponseDto criarCliente(ClienteRequestDto request) {

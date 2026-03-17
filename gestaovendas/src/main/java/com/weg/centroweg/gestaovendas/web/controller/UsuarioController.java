@@ -4,6 +4,7 @@ import com.weg.centroweg.gestaovendas.application.dto.usuario.UsuarioRequestDto;
 import com.weg.centroweg.gestaovendas.application.dto.usuario.UsuarioResponseDto;
 import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,14 +15,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuarios")
+@RequiredArgsConstructor
+
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-
-
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
 
     @PostMapping
     public ResponseEntity<UsuarioResponseDto>save(@Valid @RequestBody UsuarioRequestDto request){

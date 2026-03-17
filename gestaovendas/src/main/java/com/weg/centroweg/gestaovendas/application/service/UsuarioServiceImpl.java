@@ -8,6 +8,7 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioServi
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,21 +17,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final UsuarioMapper mapper;
 
-    public UsuarioServiceImpl(
-            UsuarioRepository usuarioRepository,
-            PasswordEncoder passwordEncoder,
-            UsuarioMapper mapper
-    ) {
-        this.usuarioRepository = usuarioRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.mapper = mapper;
-    }
 
     @Override
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto request) {

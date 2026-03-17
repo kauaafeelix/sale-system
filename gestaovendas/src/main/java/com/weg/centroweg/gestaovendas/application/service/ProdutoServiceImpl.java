@@ -13,16 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
 
     private final ProdutoRepository repository;
     private final ProdutoMapper mapper;
 
-    public ProdutoServiceImpl(ProdutoRepository repository, ProdutoMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public ProdutoResponseDto criarProduto(ProdutoRequestDto request) {

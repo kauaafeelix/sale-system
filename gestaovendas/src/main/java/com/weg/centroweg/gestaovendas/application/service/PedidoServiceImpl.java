@@ -8,21 +8,19 @@ import com.weg.centroweg.gestaovendas.domain.entity.Pedido;
 import com.weg.centroweg.gestaovendas.domain.entity.enums.StatusPedido;
 import com.weg.centroweg.gestaovendas.domain.repository.PedidoRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
     private final PedidoMapper mapper;
     private final PedidoRepository repository;
 
-    public PedidoServiceImpl(PedidoMapper mapper, PedidoRepository repository) {
-        this.mapper = mapper;
-        this.repository = repository;
-    }
 
     @Override
     public PedidoResponseDto criarPedido(PedidoRequestDto request) {
