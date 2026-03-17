@@ -8,9 +8,11 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioServi
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,14 +35,26 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto request) {
 
-        if (usuarioRepository.findByEmail(request.email()).isPresent()) {
-            throw new BusinessException("Email já cadastrado");
-        }
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
 
-        Usuario usuario = mapper.toEntity(request);
+        Usuario admin = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        Usuario usuario = new Usuario();
+
+        usuario.setNome(request.nome());
+        usuario.setEmail(request.email());
         usuario.setSenha(passwordEncoder.encode(request.senha()));
+        usuario.setRole(request.role());
+
+        usuario.setDataCriacao(LocalDateTime.now());
+        usuario.setCriadoPor(admin);
 
         usuarioRepository.save(usuario);
+
         return mapper.toDto(usuario);
     }
 

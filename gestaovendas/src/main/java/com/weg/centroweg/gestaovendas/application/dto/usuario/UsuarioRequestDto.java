@@ -20,13 +20,6 @@ public record UsuarioRequestDto(
         String senha,
 
         @NotNull (message = "O papel do usuário é obrigatório")
-        RoleUsuario role,
-
-        @NotNull(message = "A data de criação do usuário é obrigatória")
-        @FutureOrPresent(message = "A data de criação do usuário não pode ser no passado")
-        LocalDateTime dataCriacao,
-
-        @NotNull(message = "O ID do usuário que criou este usuário é obrigatório")
-        UUID criadoPor
+        RoleUsuario role
 ) {
 }
