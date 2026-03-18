@@ -29,23 +29,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto request) {
 
-        String email = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getName();
+        Usuario usuario = mapper.toEntity(request);
 
-        Usuario admin = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
-        Usuario usuario = new Usuario();
-
-        usuario.setNome(request.nome());
-        usuario.setEmail(request.email());
         usuario.setSenha(passwordEncoder.encode(request.senha()));
-        usuario.setRole(request.role());
-
         usuario.setDataCriacao(LocalDateTime.now());
-        usuario.setCriadoPor(admin);
+
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || !auth.isAuthenticated() || auth.getName().equals("anonymousUser")) {
+            usuario.setCriadoPor(null);
+        } else {
+
+            String email = auth.getName();
+
+            Usuario admin = usuarioRepository.findByEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+            usuario.setCriadoPor(admin);
+        }
 
         usuarioRepository.save(usuario);
 

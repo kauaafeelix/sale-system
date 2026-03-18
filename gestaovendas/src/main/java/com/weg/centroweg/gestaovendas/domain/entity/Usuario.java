@@ -37,7 +37,7 @@ public class Usuario {
     private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private Usuario criadoPor;
 
     public Usuario(String nome, String email, String senha, RoleUsuario role, LocalDateTime dataCriacao, Usuario criadoPor) {
