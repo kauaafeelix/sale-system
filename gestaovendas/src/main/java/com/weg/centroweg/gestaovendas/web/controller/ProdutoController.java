@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProdutoController {
 
     private final ProdutoService service;
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<ProdutoResponseDto>save(
             @Valid @RequestBody ProdutoRequestDto request
@@ -57,5 +59,13 @@ public class ProdutoController {
         ProdutoResponseDto response = service.atualizarProduto(id, request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDto> delete(@PathVariable UUID id){
+
+        service.deletarProduto(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
