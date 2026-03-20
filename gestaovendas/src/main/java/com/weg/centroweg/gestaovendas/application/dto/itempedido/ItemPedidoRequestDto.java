@@ -8,16 +8,11 @@ import java.util.UUID;
 
 public record ItemPedidoRequestDto(
 
-        @NotNull (message = "O ID do pedido é obrigatório")
-        UUID pedidoId,
-
         @NotNull (message = "O ID do produto é obrigatório")
         UUID produtoId,
 
         @Positive (message = "A quantidade deve ser um número maior que zero")
-        int quantidade,
+        int quantidade
 
-        @Positive (message = "O preço unitário deve ser um número maior que zero")
-        double precoUnitario
 ) {
 }
