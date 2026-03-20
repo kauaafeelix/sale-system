@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 
@@ -19,21 +20,23 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column
-    private UUID pedidoId;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
-    @Column
-    private UUID produtoId;
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     @Column
     private int quantidade;
 
     @Column
-    private double precoUnitario;
+    private BigDecimal precoUnitario;
 
-    public ItemPedido(UUID pedidoId, UUID produtoId, int quantidade, double precoUnitario) {
-        this.pedidoId = pedidoId;
-        this.produtoId = produtoId;
+    public ItemPedido(Pedido pedido, Produto produto, int quantidade, BigDecimal precoUnitario) {
+        this.pedido = pedido;
+        this.produto = produto;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
