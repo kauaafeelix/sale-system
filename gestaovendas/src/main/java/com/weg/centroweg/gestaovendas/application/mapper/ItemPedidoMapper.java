@@ -9,22 +9,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemPedidoMapper {
 
-    public ItemPedido toEntity(ItemPedidoRequestDto dto){
+    public ItemPedido toEntity (ItemPedidoRequestDto request){
+
         return new ItemPedido(
-                dto.pedidoId(),
-                dto.produtoId(),
-                dto.quantidade(),
-                dto.precoUnitario()
-                );
+                request.quantidade(),
+                request.precoUnitario()
+        );
     }
 
-    public ItemPedidoResponseDto toDto ( ItemPedido entity){
+    public ItemPedidoResponseDto toDto(ItemPedido item){
+
         return new ItemPedidoResponseDto(
-                entity.getId(),
-                entity.getPedidoId(),
-                entity.getProdutoId(),
-                entity.getQuantidade(),
-                entity.getPrecoUnitario()
+                item.getId(),
+                item.getQuantidade(),
+                item.getPrecoUnitario(),
+                item.getPedido().getId(),
+                item.getProduto().getId()
         );
     }
 }

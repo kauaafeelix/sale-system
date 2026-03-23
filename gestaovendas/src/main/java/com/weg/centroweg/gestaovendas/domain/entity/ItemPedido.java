@@ -20,6 +20,12 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column
+    private int quantidade;
+
+    @Column
+    private double precoUnitario;
+
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
@@ -28,15 +34,8 @@ public class ItemPedido {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
-    @Column
-    private int quantidade;
 
-    @Column
-    private BigDecimal precoUnitario;
-
-    public ItemPedido(Pedido pedido, Produto produto, int quantidade, BigDecimal precoUnitario) {
-        this.pedido = pedido;
-        this.produto = produto;
+    public ItemPedido(int quantidade, double precoUnitario) {
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
