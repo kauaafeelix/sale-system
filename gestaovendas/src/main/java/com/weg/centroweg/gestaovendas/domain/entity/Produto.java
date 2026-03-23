@@ -28,20 +28,19 @@ public class Produto {
     private String descricao;
 
     @Column (nullable = false)
-    private BigDecimal preco;
+    private double preco;
 
     @Column(nullable = false)
-    private int quantidadeEstoque;
+    private int estoque;
 
     @OneToMany(mappedBy = "produto")
     private List<ItemPedido> itens;
 
 
-    public Produto(String nome, String descricao, BigDecimal preco, int quantidadeEstoque, List<ItemPedido> itens) {
+    public Produto(String nome, String descricao, double preco, int estoque) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.itens = itens;
+        this.estoque = estoque;
     }
 }

@@ -8,23 +8,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProdutoMapper {
 
-    public Produto toEntity (ProdutoRequestDto dto){
+
+    public Produto toEntity(ProdutoRequestDto request){
         return new Produto(
-                dto.nome(),
-                dto.descricao(),
-                dto.preco(),
-                dto.quantidadeEstoque()
+                request.nome(),
+                request.descricao(),
+                request.preco(),
+                request.estoque()
         );
     }
 
-    public ProdutoResponseDto toDto (Produto produto){
+    public ProdutoResponseDto toDto(Produto produto){
+
         return new ProdutoResponseDto(
                 produto.getId(),
                 produto.getNome(),
                 produto.getDescricao(),
                 produto.getPreco(),
-                produto.getQuantidadeEstoque()
+                produto.getEstoque()
         );
     }
-
 }
