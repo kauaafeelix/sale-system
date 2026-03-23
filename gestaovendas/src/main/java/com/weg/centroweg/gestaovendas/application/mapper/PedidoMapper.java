@@ -9,25 +9,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedidoMapper {
 
+    public Pedido toEntity(PedidoRequestDto request){
 
-    public Pedido toEntity(PedidoRequestDto dto) {
-        return new Pedido(
-                dto.clienteId(),
-                dto.usuarioId(),
-                dto.dataPedido(),
-                dto.valorTotal(),
-                dto.status()
+        return new Pedido (
+                request.dataPedido(),
+                request.valorTotal(),
+                request.status()
         );
     }
 
-    public PedidoResponseDto toDto(Pedido pedido) {
+    public PedidoResponseDto toDto(Pedido pedido){
+
         return new PedidoResponseDto(
                 pedido.getId(),
-                pedido.getClienteId(),
-                pedido.getUsuarioId(),
                 pedido.getDataPedido(),
                 pedido.getValorTotal(),
-                pedido.getStatus()
+                pedido.getStatus(),
+                pedido.getUsuario().getId(),
+                pedido.getCliente().getId()
         );
     }
+
 }

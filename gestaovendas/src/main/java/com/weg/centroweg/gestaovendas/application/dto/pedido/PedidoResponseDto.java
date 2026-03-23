@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.UUID;
 
 public record PedidoResponseDto(
+
         UUID id,
-        UUID clienteId,
-        UUID usuarioId,
         LocalDateTime dataPedido,
         double valorTotal,
         StatusPedido status,
-        List<ItemPedidoResponseDto> itens
+        UUID idUsuario,
+        UUID idCliente
 ) {
 }
