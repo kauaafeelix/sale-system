@@ -23,11 +23,13 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column
-    private UUID clienteId;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
-    @Column
-    private UUID usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     @DateTimeFormat
     private LocalDateTime dataPedido;
@@ -42,12 +44,9 @@ public class Pedido {
     private List<ItemPedido> itens;
 
 
-    public Pedido(UUID clienteId, UUID usuarioId, LocalDateTime dataPedido, double valorTotal, StatusPedido status, List<ItemPedido> itens) {
-        this.clienteId = clienteId;
-        this.usuarioId = usuarioId;
-        this.dataPedido = dataPedido;
+    public Pedido(LocalDateTime dataPedido, double valorTotal, StatusPedido status) {
+        this.dataPedido = LocalDateTime.now();
         this.valorTotal = valorTotal;
         this.status = status;
-        this.itens = itens;
     }
 }
