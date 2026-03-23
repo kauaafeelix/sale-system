@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -39,6 +40,9 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(nullable = true)
     private Usuario criadoPor;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos;
 
     public Usuario(String nome, String email, String senha, RoleUsuario role, LocalDateTime dataCriacao, Usuario criadoPor) {
         this.nome = nome;
