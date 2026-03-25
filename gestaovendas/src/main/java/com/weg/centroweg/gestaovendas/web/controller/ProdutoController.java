@@ -1,7 +1,8 @@
 package com.weg.centroweg.gestaovendas.web.controller;
 
-import com.weg.centroweg.gestaovendas.application.dto.produto.ProdutoRequestDto;
-import com.weg.centroweg.gestaovendas.application.dto.produto.ProdutoResponseDto;
+import com.weg.centroweg.gestaovendas.application.dto.produto.request.AtualizaEstoqueRequestDto;
+import com.weg.centroweg.gestaovendas.application.dto.produto.request.ProdutoRequestDto;
+import com.weg.centroweg.gestaovendas.application.dto.produto.response.ProdutoResponseDto;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,14 +36,14 @@ public class ProdutoController {
         return ResponseEntity.ok(responses);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<ProdutoResponseDto> findById(@PathVariable UUID id){
         ProdutoResponseDto response = service.buscarPorId(id);
 
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("nome/{nome}")
     public ResponseEntity<List<ProdutoResponseDto>> findByNameContaining(@PathVariable String nome){
         List<ProdutoResponseDto> responses = service.buscarPorNome(nome);
 
@@ -50,15 +51,15 @@ public class ProdutoController {
 
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponseDto> update(
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateStock(
             @PathVariable UUID id,
-            @Valid @RequestBody ProdutoRequestDto request
-    ){
+            @Valid @RequestBody AtualizaEstoqueRequestDto request
+    ) {
 
-        ProdutoResponseDto response = service.atualizarProduto(id, request);
+        service.atualizarEstoque(id, request.estoque());
+        return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")

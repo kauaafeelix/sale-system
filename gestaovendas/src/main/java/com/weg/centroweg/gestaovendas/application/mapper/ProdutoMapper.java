@@ -1,7 +1,7 @@
 package com.weg.centroweg.gestaovendas.application.mapper;
 
-import com.weg.centroweg.gestaovendas.application.dto.produto.ProdutoRequestDto;
-import com.weg.centroweg.gestaovendas.application.dto.produto.ProdutoResponseDto;
+import com.weg.centroweg.gestaovendas.application.dto.produto.request.ProdutoRequestDto;
+import com.weg.centroweg.gestaovendas.application.dto.produto.response.ProdutoResponseDto;
 import com.weg.centroweg.gestaovendas.domain.entity.Produto;
 import org.springframework.stereotype.Component;
 
