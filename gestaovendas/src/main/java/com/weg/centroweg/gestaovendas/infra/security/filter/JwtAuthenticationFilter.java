@@ -1,7 +1,7 @@
-package com.weg.centroweg.gestaovendas.infra.secutiry.filter;
+package com.weg.centroweg.gestaovendas.infra.security.filter;
 
-import com.weg.centroweg.gestaovendas.infra.secutiry.jwt.JwtService;
-import com.weg.centroweg.gestaovendas.infra.secutiry.service.UserDetailsServiceImpl;
+import com.weg.centroweg.gestaovendas.infra.security.jwt.JwtService;
+import com.weg.centroweg.gestaovendas.infra.security.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

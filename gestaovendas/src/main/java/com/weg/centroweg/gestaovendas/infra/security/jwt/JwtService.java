@@ -1,8 +1,7 @@
-package com.weg.centroweg.gestaovendas.infra.secutiry.jwt;
+package com.weg.centroweg.gestaovendas.infra.security.jwt;
 
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;

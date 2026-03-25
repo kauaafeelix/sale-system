@@ -1,4 +1,4 @@
-package com.weg.centroweg.gestaovendas.infra.secutiry.service;
+package com.weg.centroweg.gestaovendas.infra.security.service;
 
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;

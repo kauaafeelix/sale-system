@@ -8,10 +8,9 @@ import com.weg.centroweg.gestaovendas.application.dto.usuario.UsuarioResponseDto
 import com.weg.centroweg.gestaovendas.application.service.contracts.AuthService;
 import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioService;
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
-import com.weg.centroweg.gestaovendas.domain.entity.enums.RoleUsuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
-import com.weg.centroweg.gestaovendas.infra.secutiry.jwt.JwtService;
+import com.weg.centroweg.gestaovendas.infra.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
