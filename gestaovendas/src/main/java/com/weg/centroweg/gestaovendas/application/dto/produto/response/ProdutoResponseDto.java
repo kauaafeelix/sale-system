@@ -1,4 +1,4 @@
-package com.weg.centroweg.gestaovendas.application.dto.produto;
+package com.weg.centroweg.gestaovendas.application.dto.produto.response;
 
 import java.util.UUID;
 
