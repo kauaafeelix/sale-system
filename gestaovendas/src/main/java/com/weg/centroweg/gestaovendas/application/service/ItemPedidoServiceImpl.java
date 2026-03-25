@@ -6,8 +6,10 @@ import com.weg.centroweg.gestaovendas.application.mapper.ItemPedidoMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ItemPedidoService;
 import com.weg.centroweg.gestaovendas.domain.entity.ItemPedido;
 import com.weg.centroweg.gestaovendas.domain.entity.Pedido;
+import com.weg.centroweg.gestaovendas.domain.entity.Produto;
 import com.weg.centroweg.gestaovendas.domain.repository.ItemPedidoRepository;
 import com.weg.centroweg.gestaovendas.domain.repository.PedidoRepository;
+import com.weg.centroweg.gestaovendas.domain.repository.ProdutoRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
 
     private final ItemPedidoRepository itemRepository;
     private final PedidoRepository pedidoRepository;
+    private final ProdutoRepository produtoRepository;
     private final ItemPedidoMapper itemMapper;
 
     @Override
@@ -29,9 +32,14 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
         Pedido pedido = pedidoRepository.findById(request.idPedido())
                 .orElseThrow(() -> new BusinessException("O ID do Pedido não existe"));
 
+
+        Produto produto = produtoRepository.findById(request.idProduto())
+                .orElseThrow(() -> new BusinessException("O ID do Produto não existe"));
+
         ItemPedido item = itemMapper.toEntity(request);
 
         item.setPedido(pedido);
+        item.setProduto(produto);
 
         itemRepository.save(item);
 
@@ -66,9 +74,13 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
         Pedido pedido = pedidoRepository.findById(request.idPedido())
                 .orElseThrow(() -> new BusinessException("O ID do Pedido não existe"));
 
+        Produto produto = produtoRepository.findById(request.idProduto())
+                .orElseThrow(() -> new BusinessException("O ID do Produto não existe"));
+
         item.setQuantidade(request.quantidade());
         item.setPrecoUnitario(request.precoUnitario());
         item.setPedido(pedido);
+        item.setProduto(produto);
 
         itemRepository.save(item);
 

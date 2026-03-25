@@ -26,12 +26,12 @@ public class ItemPedido {
     @Column
     private double precoUnitario;
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
 
