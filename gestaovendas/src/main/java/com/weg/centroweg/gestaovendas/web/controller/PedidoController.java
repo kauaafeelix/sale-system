@@ -48,7 +48,7 @@ public class PedidoController {
     }
 
     @GetMapping("/clientes/{id}")
-    public ResponseEntity<List<PedidoResponseDto>> findByClienteId(@PathVariable UUID clienteId){
+    public ResponseEntity<List<PedidoResponseDto>> findByClienteId(@PathVariable("id") UUID clienteId){
 
         List<PedidoResponseDto> response = service.listarPedidosPorCliente(clienteId);
 
@@ -56,9 +56,9 @@ public class PedidoController {
     }
 
     @GetMapping("/usuarios/{id}")
-    public ResponseEntity<List<PedidoResponseDto>> findByUsuarioId(@PathVariable UUID usuarioId){
+    public ResponseEntity<List<PedidoResponseDto>> findByUsuarioId(@PathVariable("id") UUID usuarioId){
 
-        List<PedidoResponseDto> response = service.listarPedidosPorCliente(usuarioId);
+        List<PedidoResponseDto> response = service.listarPedidosPorUsuario(usuarioId);
 
         return ResponseEntity.ok(response);
     }
