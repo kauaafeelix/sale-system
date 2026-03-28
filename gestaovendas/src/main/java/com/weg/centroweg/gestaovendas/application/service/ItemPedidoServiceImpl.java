@@ -10,7 +10,7 @@ import com.weg.centroweg.gestaovendas.domain.entity.Produto;
 import com.weg.centroweg.gestaovendas.domain.repository.ItemPedidoRepository;
 import com.weg.centroweg.gestaovendas.domain.repository.PedidoRepository;
 import com.weg.centroweg.gestaovendas.domain.repository.ProdutoRepository;
-import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import com.weg.centroweg.gestaovendas.infra.exception.RecursoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +30,11 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     public ItemPedidoResponseDto criarItemPedido(ItemPedidoRequestDto request) {
 
         Pedido pedido = pedidoRepository.findById(request.idPedido())
-                .orElseThrow(() -> new BusinessException("O ID do Pedido não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pedido", request.idPedido()));
 
 
         Produto produto = produtoRepository.findById(request.idProduto())
-                .orElseThrow(() -> new BusinessException("O ID do Produto não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto", request.idProduto()));
 
         ItemPedido item = itemMapper.toEntity(request);
 
@@ -51,7 +51,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     public ItemPedidoResponseDto buscarPorId(UUID id) {
 
         ItemPedido item = itemRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("O ID do ItemPedido não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Item Pedido", id));
 
         return itemMapper.toDto(item);
     }
@@ -69,13 +69,13 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     @Override
     public ItemPedidoResponseDto atualizarItemPedido(UUID id, ItemPedidoRequestDto request) {
         ItemPedido item = itemRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("O ID do ItemPedido não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Item Pedido", id));
 
         Pedido pedido = pedidoRepository.findById(request.idPedido())
-                .orElseThrow(() -> new BusinessException("O ID do Pedido não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pedido", request.idPedido()));
 
         Produto produto = produtoRepository.findById(request.idProduto())
-                .orElseThrow(() -> new BusinessException("O ID do Produto não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto", request.idProduto()));
 
         item.setQuantidade(request.quantidade());
         item.setPrecoUnitario(request.precoUnitario());
@@ -91,7 +91,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService {
     public void deletarItemPedido(UUID id) {
 
         ItemPedido item = itemRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("O ID do ItemPedido não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Item Pedido", id));
 
         itemRepository.delete(item);
     }

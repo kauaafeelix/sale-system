@@ -11,7 +11,8 @@ import com.weg.centroweg.gestaovendas.domain.entity.enums.StatusPedido;
 import com.weg.centroweg.gestaovendas.domain.repository.ClienteRepository;
 import com.weg.centroweg.gestaovendas.domain.repository.PedidoRepository;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
-import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import com.weg.centroweg.gestaovendas.infra.exception.PedidoStatusInvalidoException;
+import com.weg.centroweg.gestaovendas.infra.exception.RecursoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +33,9 @@ public class PedidoServiceImpl implements PedidoService {
     public PedidoResponseDto criarPedido(PedidoRequestDto request) {
 
         Usuario usuario = usuarioRepository.findById(request.idUsuario())
-                .orElseThrow(()-> new BusinessException("O ID do usuário não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Usuário", request.idUsuario()));
         Cliente cliente = clienteRepository.findById(request.idCliente())
-                .orElseThrow(() -> new BusinessException("O ID do cliente não existe"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente", request.idCliente()));
 
         Pedido pedido = mapper.toEntity(request);
 
@@ -50,7 +51,7 @@ public class PedidoServiceImpl implements PedidoService {
     public PedidoResponseDto buscarPorId(UUID id) {
 
         Pedido pedido = pedidoRepository.findById(id)
-                .orElseThrow(()-> new BusinessException("O ID do Pedido não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Pedido", id));
 
         return mapper.toDto(pedido);
     }
@@ -59,7 +60,7 @@ public class PedidoServiceImpl implements PedidoService {
     public List<PedidoResponseDto> listarPedidosPorUsuario(UUID usuarioId) {
 
         Usuario usuario = usuarioRepository.findById(usuarioId)
-                .orElseThrow(()-> new BusinessException("O ID do usuário não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Usuário", usuarioId));
 
         List<Pedido> pedidos = pedidoRepository.findByUsuarioId(usuarioId);
 
@@ -82,7 +83,7 @@ public class PedidoServiceImpl implements PedidoService {
     public List<PedidoResponseDto> listarPedidosPorCliente(UUID clienteId) {
 
         Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(()-> new BusinessException("O ID do cliente não existe."));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Cliente", clienteId));
 
         return pedidoRepository.findByClienteId(clienteId)
                 .stream()
@@ -94,10 +95,10 @@ public class PedidoServiceImpl implements PedidoService {
     public void cancelarPedido(UUID id) {
 
         Pedido pedido = pedidoRepository.findById(id)
-                .orElseThrow(()-> new BusinessException("O ID do Pedido não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Pedido", id));
 
         if (!pedido.getStatus().equals(StatusPedido.PENDENTE)) {
-            throw new BusinessException("Apenas pedidos pendentes podem ser cancelados");
+            throw new PedidoStatusInvalidoException(pedido.getStatus());
         }
 
         pedido.setStatus(StatusPedido.CANCELADO);

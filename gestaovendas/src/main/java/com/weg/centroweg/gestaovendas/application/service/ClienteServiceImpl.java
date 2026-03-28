@@ -6,7 +6,8 @@ import com.weg.centroweg.gestaovendas.application.mapper.ClienteMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ClienteService;
 import com.weg.centroweg.gestaovendas.domain.entity.Cliente;
 import com.weg.centroweg.gestaovendas.domain.repository.ClienteRepository;
-import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import com.weg.centroweg.gestaovendas.infra.exception.EmailJaCadastradoException;
+import com.weg.centroweg.gestaovendas.infra.exception.RecursoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,11 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteResponseDto criarCliente(ClienteRequestDto request) {
+
+        if (repository.existsByEmail(request.email())) {
+            throw new EmailJaCadastradoException(request.email());
+        }
+
         Cliente cliente = mapper.toEntity(request);
         repository.save(cliente);
 
@@ -31,7 +37,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteResponseDto buscarPorId(UUID id) {
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente", id));
 
         return mapper.toDto(cliente);
     }
@@ -47,7 +53,14 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteResponseDto atualizarCliente(UUID id, ClienteRequestDto request) {
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente", id));
+
+        boolean emailEmUso = repository.existsByEmail(request.email()) &&
+                !cliente.getEmail().equalsIgnoreCase(request.email());
+
+        if (emailEmUso) {
+            throw new EmailJaCadastradoException(request.email());
+        }
 
         cliente.setNome(request.nome());
         cliente.setEmail(request.email());
@@ -62,7 +75,7 @@ public class ClienteServiceImpl implements ClienteService {
     public void deletarCliente(UUID id) {
 
         Cliente cliente = repository.findById(id)
-                .orElseThrow(() -> new BusinessException("Cliente não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente", id));
 
         repository.deleteById(id);
     }

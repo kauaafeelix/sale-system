@@ -6,7 +6,8 @@ import com.weg.centroweg.gestaovendas.application.mapper.ProdutoMapper;
 import com.weg.centroweg.gestaovendas.application.service.contracts.ProdutoService;
 import com.weg.centroweg.gestaovendas.domain.entity.Produto;
 import com.weg.centroweg.gestaovendas.domain.repository.ProdutoRepository;
-import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import com.weg.centroweg.gestaovendas.infra.exception.EstoqueInsuficienteException;
+import com.weg.centroweg.gestaovendas.infra.exception.RecursoNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ProdutoResponseDto buscarPorId(UUID id) {
 
         Produto produto = repository.findById(id)
-                .orElseThrow(()-> new BusinessException("O ID do produto não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Produto", id));
 
         return mapper.toDto(produto);
     }
@@ -63,7 +64,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     public void deletarProduto(UUID id) {
 
         	Produto produto = repository.findById(id)
-                    .orElseThrow(()-> new BusinessException("O ID do produto não existe"));
+                    .orElseThrow(()-> new RecursoNaoEncontradoException("Produto", id));
 
             repository.delete(produto);
     }
@@ -72,12 +73,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     public void atualizarEstoque(UUID produtoId, int quantidade) {
 
         Produto produto = repository.findById(produtoId)
-                .orElseThrow(()-> new BusinessException("O ID do produto não existe"));
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Produto", produtoId));
 
         int novoEstoque = produto.getEstoque() + quantidade;
 
         if (novoEstoque < 0) {
-            throw new BusinessException("Estoque insuficiente para a operação.");
+            throw new EstoqueInsuficienteException(produto.getEstoque(), quantidade);
         }
 
         produto.setEstoque(novoEstoque);

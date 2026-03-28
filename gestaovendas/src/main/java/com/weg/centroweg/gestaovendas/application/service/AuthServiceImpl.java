@@ -10,6 +10,8 @@ import com.weg.centroweg.gestaovendas.application.service.contracts.UsuarioServi
 import com.weg.centroweg.gestaovendas.domain.entity.Usuario;
 import com.weg.centroweg.gestaovendas.domain.repository.UsuarioRepository;
 import com.weg.centroweg.gestaovendas.infra.exception.BusinessException;
+import com.weg.centroweg.gestaovendas.infra.exception.CredenciaisInvalidasException;
+import com.weg.centroweg.gestaovendas.infra.exception.RecursoNaoEncontradoException;
 import com.weg.centroweg.gestaovendas.infra.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
 
         Usuario usuario = usuarioRepository
                 .findByEmail(request.email())
-                .orElseThrow();
+                .orElseThrow(CredenciaisInvalidasException::new);
 
         String token = jwtService.gerarToken(usuario);
 
@@ -57,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
         UsuarioResponseDto usuario = usuarioService.criarUsuario(usuarioDto);
 
         Usuario entity = usuarioRepository.findByEmail(usuario.email())
-                .orElseThrow(() -> new BusinessException("Usuário não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário", usuario.email()));
 
         String token = jwtService.gerarToken(entity);
         return new AuthResponse(token);
