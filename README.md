@@ -1,94 +1,117 @@
-# 🛒 Sistema de Vendas API
+<h1 align="center">🛒 Sistema de Vendas API</h1>
 
-API REST desenvolvida em **Java 21 com Spring Boot 3** para gerenciamento completo de um sistema de vendas. A aplicação permite o controle de **usuários, clientes, produtos, pedidos e itens de pedido**, com **autenticação e autorização via JWT**, garantindo acesso seguro e baseado em papéis (roles) aos recursos da API.
+<p align="center">
+  <strong>API REST completa para gerenciamento de vendas, construída com Java 21 e Spring Boot 3</strong>
+</p>
 
-O projeto segue uma organização em camadas inspirada em **Clean Architecture**, separando domínio, aplicação, infraestrutura e interface da API, facilitando manutenção e escalabilidade.
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21"/>
+  <img src="https://img.shields.io/badge/Spring_Boot-3.5.11-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot"/>
+  <img src="https://img.shields.io/badge/Spring_Security-JWT-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" alt="Spring Security"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+  <img src="https://img.shields.io/badge/Maven-3.11.0-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven"/>
+  <img src="https://img.shields.io/badge/Swagger-UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger"/>
+</p>
+
+<p align="center">
+  A aplicação oferece controle completo de <strong>usuários, clientes, produtos, pedidos e itens de pedido</strong>, com autenticação e autorização via <strong>JWT</strong> e controle de acesso baseado em papéis (RBAC).
+</p>
 
 ---
 
 ## 📋 Índice
 
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Arquitetura do Projeto](#-arquitetura-do-projeto)
-- [Estrutura de Pastas](#-estrutura-de-pastas)
-- [Modelo de Dados](#-modelo-de-dados)
-- [Como Executar](#-como-executar)
-- [Variáveis de Ambiente](#-variáveis-de-ambiente)
-- [Endpoints da API](#-endpoints-da-api)
-- [Segurança e Autenticação](#-segurança-e-autenticação)
-- [Objetivo do Projeto](#-objetivo-do-projeto)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologias](#️-tecnologias)
+- [🏗️ Arquitetura](#️-arquitetura)
+- [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+- [🗄️ Modelo de Dados](#️-modelo-de-dados)
+- [🚀 Como Executar](#-como-executar)
+- [⚙️ Configuração](#️-configuração)
+- [📡 Endpoints da API](#-endpoints-da-api)
+- [🔒 Segurança e Autenticação](#-segurança-e-autenticação)
+- [🎯 Objetivo do Projeto](#-objetivo-do-projeto)
 
 ---
 
-## ✅ Funcionalidades
+## ✨ Funcionalidades
 
-- Autenticação e autorização com **JWT** (JSON Web Token)
-- Cadastro e gerenciamento de **usuários** (acesso restrito ao ADMIN)
-- Cadastro e gerenciamento de **clientes**
-- Cadastro e gerenciamento de **produtos** com controle de estoque
-- Criação e gerenciamento de **pedidos**
-- Gerenciamento de **itens de pedido** com cálculo de valor total
-- Controle de **estoque** com validação de quantidade
-- Criptografia de senhas com **BCrypt**
-- Controle de acesso por **papéis (roles)**: `ADMIN` e `VENDEDOR`
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-| Tecnologia | Versão | Descrição |
+| # | Funcionalidade | Descrição |
 |---|---|---|
-| **Java** | 21 | Linguagem principal |
-| **Spring Boot** | 3.5.11 | Framework principal |
-| **Spring Security** | 3.5.11 | Autenticação e autorização |
-| **Spring Data JPA** | 3.5.11 | Persistência de dados |
-| **JJWT** | 0.11.5 | Geração e validação de tokens JWT |
-| **PostgreSQL** | — | Banco de dados relacional |
-| **Hibernate** | — | ORM (via Spring Data JPA) |
-| **Lombok** | — | Redução de código boilerplate |
-| **Jakarta Validation** | — | Validação de dados de entrada |
-| **SpringDoc OpenAPI** | 2.8.16 | Documentação automática (Swagger UI) |
-| **Maven** | 3.11.0 | Gerenciador de dependências e build |
-| **Docker** | — | Containerização do banco de dados |
+| 🔐 | **Autenticação JWT** | Login e registro com geração de tokens JWT (HS256) |
+| 👥 | **Gestão de Usuários** | CRUD completo, restrito ao perfil ADMIN |
+| 🧑‍💼 | **Gestão de Clientes** | Cadastro e manutenção de clientes |
+| 📦 | **Gestão de Produtos** | CRUD com controle de estoque e busca por nome |
+| 🧾 | **Gestão de Pedidos** | Criação, consulta e cancelamento de pedidos |
+| 🧩 | **Itens de Pedido** | Gerenciamento de itens com cálculo automático de totais |
+| 🔑 | **Controle de Acesso (RBAC)** | Permissões granulares por papel: `ADMIN` e `VENDEDOR` |
+| 🔐 | **Senhas Seguras** | Armazenamento com hash **BCrypt** |
+| 📊 | **Swagger UI** | Documentação interativa automática da API |
 
 ---
 
-## 🏗️ Arquitetura do Projeto
+## 🛠️ Tecnologias
 
-O projeto segue o padrão de **Arquitetura em Camadas** (inspirada em Clean Architecture), com responsabilidades bem definidas:
+<table>
+  <thead>
+    <tr>
+      <th>Tecnologia</th>
+      <th>Versão</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Java</strong></td><td>21</td><td>Linguagem principal</td></tr>
+    <tr><td><strong>Spring Boot</strong></td><td>3.5.11</td><td>Framework principal</td></tr>
+    <tr><td><strong>Spring Security</strong></td><td>3.5.11</td><td>Autenticação e autorização</td></tr>
+    <tr><td><strong>Spring Data JPA</strong></td><td>3.5.11</td><td>Persistência de dados (ORM)</td></tr>
+    <tr><td><strong>JJWT</strong></td><td>0.11.5</td><td>Geração e validação de tokens JWT</td></tr>
+    <tr><td><strong>PostgreSQL</strong></td><td>—</td><td>Banco de dados relacional</td></tr>
+    <tr><td><strong>Hibernate</strong></td><td>—</td><td>ORM (via Spring Data JPA)</td></tr>
+    <tr><td><strong>Lombok</strong></td><td>—</td><td>Redução de código boilerplate</td></tr>
+    <tr><td><strong>Jakarta Validation</strong></td><td>—</td><td>Validação de dados de entrada</td></tr>
+    <tr><td><strong>SpringDoc OpenAPI</strong></td><td>2.8.16</td><td>Documentação automática (Swagger UI)</td></tr>
+    <tr><td><strong>Maven</strong></td><td>3.11.0</td><td>Gerenciador de dependências e build</td></tr>
+    <tr><td><strong>Docker</strong></td><td>—</td><td>Containerização do banco de dados</td></tr>
+  </tbody>
+</table>
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto segue o padrão de **Arquitetura em Camadas** (inspirada em Clean Architecture), com responsabilidades bem definidas em cada camada:
 
 ```
-┌──────────────────────────────────────────────────┐
-│                   WEB LAYER                      │
-│  Controllers REST  │  Exception Advice           │
-└──────────────────────┬───────────────────────────┘
-                       │
-┌──────────────────────▼───────────────────────────┐
-│              APPLICATION LAYER                   │
-│  Services (interfaces + implementações)          │
-│  DTOs (Request / Response)  │  Mappers           │
-└──────────────────────┬───────────────────────────┘
-                       │
-┌──────────────────────▼───────────────────────────┐
-│                DOMAIN LAYER                      │
-│  Entidades JPA  │  Enums  │  Repositórios        │
-└──────────────────────┬───────────────────────────┘
-                       │
-┌──────────────────────▼───────────────────────────┐
-│            INFRASTRUCTURE LAYER                  │
-│  Spring Security  │  JWT  │  Exceções customizadas│
-└──────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│                     WEB LAYER                        │
+│       Controllers REST  │  Exception Advice          │
+└──────────────────────────┬───────────────────────────┘
+                           │
+┌──────────────────────────▼───────────────────────────┐
+│                APPLICATION LAYER                     │
+│   Services (interfaces + implementações)             │
+│   DTOs (Request / Response)  │  Mappers              │
+└──────────────────────────┬───────────────────────────┘
+                           │
+┌──────────────────────────▼───────────────────────────┐
+│                  DOMAIN LAYER                        │
+│   Entidades JPA  │  Enums  │  Repositórios           │
+└──────────────────────────┬───────────────────────────┘
+                           │
+┌──────────────────────────▼───────────────────────────┐
+│              INFRASTRUCTURE LAYER                    │
+│   Spring Security  │  JWT  │  Exceções customizadas  │
+└──────────────────────────────────────────────────────┘
 ```
-
-**Descrição das camadas:**
 
 | Camada | Pacote | Responsabilidade |
 |---|---|---|
-| **web** | `web/controller`, `web/advice` | Controllers REST e tratamento global de exceções |
-| **application** | `application/service`, `application/dto`, `application/mapper` | Lógica de negócio, DTOs e mapeamento |
-| **domain** | `domain/entity`, `domain/repository` | Entidades JPA, enums e interfaces de repositório |
-| **infra** | `infra/secutiry`, `infra/exception` | Segurança (JWT, filtros), exceções customizadas |
+| **Web** | `web/controller`, `web/advice` | Controllers REST e tratamento global de exceções |
+| **Application** | `application/service`, `application/dto`, `application/mapper` | Lógica de negócio, DTOs e mapeamento |
+| **Domain** | `domain/entity`, `domain/repository` | Entidades JPA, enums e interfaces de repositório |
+| **Infrastructure** | `infra/security`, `infra/exception` | Segurança (JWT, filtros) e exceções customizadas |
 
 ---
 
@@ -99,7 +122,7 @@ gestaovendas/
 └── src/
     ├── main/
     │   ├── java/com/weg/centroweg/gestaovendas/
-    │   │   ├── SistemaDeVendasApplication.java
+    │   │   ├── SistemaDeVendasApplication.java       ← Ponto de entrada
     │   │   ├── application/
     │   │   │   ├── dto/
     │   │   │   │   ├── auth/          # LoginRequest, RegisterRequest, AuthResponse
@@ -113,19 +136,19 @@ gestaovendas/
     │   │   │       ├── contracts/     # Interfaces dos serviços
     │   │   │       └── impl/          # Implementações dos serviços
     │   │   ├── domain/
-    │   │   │   ├── entity/            # Entidades JPA
+    │   │   │   ├── entity/            # Entidades JPA (Usuario, Cliente, Produto, Pedido, ItemPedido)
     │   │   │   │   └── enums/         # RoleUsuario, StatusPedido
     │   │   │   └── repository/        # Repositórios Spring Data JPA
     │   │   ├── infra/
-    │   │   │   ├── exception/         # BusinessException
+    │   │   │   ├── exception/         # Exceções de negócio customizadas
     │   │   │   └── secutiry/
     │   │   │       ├── config/        # SecurityConfig
     │   │   │       ├── filter/        # JwtAuthenticationFilter
     │   │   │       ├── jwt/           # JwtService
     │   │   │       └── service/       # UserDetailsServiceImpl
     │   │   └── web/
-    │   │       ├── advice/            # ApiExceptionHandler
-    │   │       └── controller/        # AuthController, UsuarioController, etc.
+    │   │       ├── advice/            # ApiExceptionHandler (tratamento global)
+    │   │       └── controller/        # AuthController, UsuarioController, ClienteController...
     │   └── resources/
     │       └── application.properties
     └── test/
@@ -136,16 +159,16 @@ gestaovendas/
 
 ## 🗄️ Modelo de Dados
 
-### Diagrama de Entidades
+### Diagrama de Entidades (ER)
 
 ```
 ┌───────────────┐        ┌──────────────────┐        ┌──────────────┐
-│   Usuario     │1      *│     Pedido       │*      1│   Cliente    │
+│   Usuario     │ 1    * │     Pedido       │ *    1 │   Cliente    │
 ├───────────────┤────────├──────────────────┤────────├──────────────┤
-│ id (UUID)     │        │ id (UUID)        │        │ id (UUID)    │
+│ id (UUID) 🔑  │        │ id (UUID) 🔑     │        │ id (UUID) 🔑 │
 │ nome          │        │ dataPedido       │        │ nome         │
 │ email (único) │        │ valorTotal       │        │ email (único)│
-│ senha         │        │ status (enum)    │        │ telefone     │
+│ senha (hash)  │        │ status (enum)    │        │ telefone     │
 │ role (enum)   │        │ cliente_id (FK)  │        └──────────────┘
 │ dataCriacao   │        │ usuario_id (FK)  │
 │ criadoPor(FK) │        └────────┬─────────┘
@@ -153,9 +176,9 @@ gestaovendas/
                                   │
                                   │ *
                          ┌────────┴─────────┐        ┌──────────────┐
-                         │   ItemPedido     │*      1│   Produto    │
+                         │   ItemPedido     │ *    1 │   Produto    │
                          ├──────────────────┤────────├──────────────┤
-                         │ id (UUID)        │        │ id (UUID)    │
+                         │ id (UUID) 🔑     │        │ id (UUID) 🔑 │
                          │ quantidade       │        │ nome         │
                          │ precoUnitario    │        │ descricao    │
                          │ pedido_id (FK)   │        │ preco        │
@@ -165,10 +188,10 @@ gestaovendas/
 
 ### Enumerações
 
-| Enum | Valores |
-|---|---|
-| `RoleUsuario` | `ADMIN`, `VENDEDOR` |
-| `StatusPedido` | `PENDENTE`, `CANCELADO`, `ENVIADO` |
+| Enum | Valores | Descrição |
+|---|---|---|
+| `RoleUsuario` | `ADMIN` \| `VENDEDOR` | Papel do usuário no sistema |
+| `StatusPedido` | `PENDENTE` \| `CANCELADO` \| `ENVIADO` | Estado atual do pedido |
 
 ---
 
@@ -176,9 +199,9 @@ gestaovendas/
 
 ### Pré-requisitos
 
-- **Java 21** ou superior
-- **Maven 3.8+**
-- **Docker** (para o banco de dados PostgreSQL)
+- ☕ **[Java 21](https://adoptium.net/)** ou superior instalado
+- 📦 **[Maven 3.8+](https://maven.apache.org/)** (ou use o Maven Wrapper incluso)
+- 🐳 **[Docker](https://www.docker.com/)** para subir o banco de dados PostgreSQL
 
 ### 1. Clone o repositório
 
@@ -198,16 +221,18 @@ docker run --name vendas-db \
   -d postgres
 ```
 
+> 💡 **Dica:** Para parar o container: `docker stop vendas-db` | Para reiniciar: `docker start vendas-db`
+
 ### 3. Configure as propriedades da aplicação
 
-Edite o arquivo `gestaovendas/src/main/resources/application.properties` com suas credenciais:
+Edite o arquivo `gestaovendas/src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/vendas_db
 spring.datasource.username=admin
-spring.datasource.password=SUA_SENHA
+spring.datasource.password=SUA_SENHA_AQUI
 
-jwt.secret=SEU_JWT_SECRET
+jwt.secret=SUA_CHAVE_SECRETA_JWT_LONGA_E_ALEATORIA
 jwt.expiration=86400000
 ```
 
@@ -218,42 +243,49 @@ cd gestaovendas
 ./mvnw spring-boot:run
 ```
 
-A API estará disponível em: `http://localhost:8080`
+### 5. Acesse a aplicação
 
-A documentação Swagger estará disponível em: `http://localhost:8080/swagger-ui.html`
+| Recurso | URL |
+|---|---|
+| 🌐 **API Base** | `http://localhost:8080` |
+| 📖 **Swagger UI** | `http://localhost:8080/swagger-ui.html` |
 
 ---
 
-## ⚙️ Variáveis de Ambiente
+## ⚙️ Configuração
+
+### Variáveis de Ambiente / Propriedades
 
 | Propriedade | Descrição | Exemplo |
 |---|---|---|
 | `spring.datasource.url` | URL de conexão com o PostgreSQL | `jdbc:postgresql://localhost:5432/vendas_db` |
 | `spring.datasource.username` | Usuário do banco de dados | `admin` |
 | `spring.datasource.password` | Senha do banco de dados | `sua_senha_segura` |
-| `jwt.secret` | Chave secreta para assinar tokens JWT | string aleatória longa |
-| `jwt.expiration` | Tempo de expiração do token em milissegundos | `86400000` (24h) |
+| `jwt.secret` | Chave secreta para assinar tokens JWT | string aleatória longa (min. 32 chars) |
+| `jwt.expiration` | Tempo de expiração do token (ms) | `86400000` *(= 24 horas)* |
 
-> ⚠️ **Atenção:** Nunca exponha credenciais reais em repositórios públicos. Utilize variáveis de ambiente ou um cofre de segredos em ambientes de produção.
+> ⚠️ **Atenção:** Nunca exponha credenciais reais em repositórios públicos. Em produção, utilize variáveis de ambiente do sistema operacional ou um cofre de segredos.
 
 ---
 
 ## 📡 Endpoints da API
 
-Todos os endpoints (exceto `/auth/**`) exigem o envio do token JWT no header:
+> Todos os endpoints (exceto `/auth/**`) requerem o token JWT no header de cada requisição:
+> ```
+> Authorization: Bearer <seu_token_jwt>
+> ```
 
-```
-Authorization: Bearer <seu_token>
-```
-
-### 🔐 Autenticação — `/auth`
+### 🔐 Autenticação — `/auth` *(público)*
 
 | Método | Rota | Acesso | Descrição |
 |---|---|---|---|
-| `POST` | `/auth/login` | Público | Realiza login e retorna um token JWT |
-| `POST` | `/auth/register` | Público | Registra novo usuário e retorna um token JWT |
+| `POST` | `/auth/login` | 🌐 Público | Realiza login e retorna token JWT |
+| `POST` | `/auth/register` | 🌐 Público | Registra novo usuário e retorna token JWT |
 
-**Body — Login (`/auth/login`):**
+<details>
+<summary><strong>Ver exemplos de body</strong></summary>
+
+**Login — `POST /auth/login`:**
 ```json
 {
   "email": "usuario@email.com",
@@ -261,7 +293,7 @@ Authorization: Bearer <seu_token>
 }
 ```
 
-**Body — Registro (`/auth/register`):**
+**Registro — `POST /auth/register`:**
 ```json
 {
   "nome": "João Silva",
@@ -277,20 +309,23 @@ Authorization: Bearer <seu_token>
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
+</details>
 
 ---
 
 ### 👤 Usuários — `/usuarios` *(apenas ADMIN)*
 
-| Método | Rota | Acesso | Descrição |
-|---|---|---|---|
-| `POST` | `/usuarios` | ADMIN | Cria um novo usuário |
-| `GET` | `/usuarios` | ADMIN | Lista todos os usuários |
-| `GET` | `/usuarios/{id}` | ADMIN | Busca usuário por ID |
-| `PUT` | `/usuarios/{id}` | ADMIN | Atualiza dados do usuário |
-| `DELETE` | `/usuarios/{id}` | ADMIN | Remove um usuário |
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/usuarios` | Cria um novo usuário |
+| `GET` | `/usuarios` | Lista todos os usuários |
+| `GET` | `/usuarios/{id}` | Busca usuário por ID |
+| `PUT` | `/usuarios/{id}` | Atualiza dados do usuário |
+| `DELETE` | `/usuarios/{id}` | Remove um usuário |
 
-**Body — `UsuarioRequestDto`:**
+<details>
+<summary><strong>Ver exemplo de body</strong></summary>
+
 ```json
 {
   "nome": "Maria Souza",
@@ -299,6 +334,7 @@ Authorization: Bearer <seu_token>
   "role": "VENDEDOR"
 }
 ```
+</details>
 
 ---
 
@@ -312,7 +348,9 @@ Authorization: Bearer <seu_token>
 | `PUT` | `/clientes/{id}` | Autenticado | Atualiza dados do cliente |
 | `DELETE` | `/clientes/{id}` | Autenticado | Remove um cliente |
 
-**Body — `ClienteRequestDto`:**
+<details>
+<summary><strong>Ver exemplo de body</strong></summary>
+
 ```json
 {
   "nome": "Carlos Lima",
@@ -320,6 +358,7 @@ Authorization: Bearer <seu_token>
   "telefone": "(11) 99999-0000"
 }
 ```
+</details>
 
 ---
 
@@ -334,7 +373,10 @@ Authorization: Bearer <seu_token>
 | `PATCH` | `/produtos/{id}` | Autenticado | Atualiza o estoque do produto |
 | `DELETE` | `/produtos/{id}` | Autenticado | Remove um produto |
 
-**Body — `ProdutoRequestDto`:**
+<details>
+<summary><strong>Ver exemplos de body</strong></summary>
+
+**Criar produto:**
 ```json
 {
   "nome": "Notebook Dell",
@@ -344,12 +386,13 @@ Authorization: Bearer <seu_token>
 }
 ```
 
-**Body — `AtualizaEstoqueRequestDto`:**
+**Atualizar estoque:**
 ```json
 {
   "estoque": 25
 }
 ```
+</details>
 
 ---
 
@@ -364,13 +407,16 @@ Authorization: Bearer <seu_token>
 | `GET` | `/pedidos/usuarios/{id}` | Autenticado | Lista pedidos de um usuário |
 | `PUT` | `/pedidos/{id}` | Autenticado | Cancela um pedido |
 
-**Body — `PedidoRequestDto`:**
+<details>
+<summary><strong>Ver exemplo de body</strong></summary>
+
 ```json
 {
   "clienteId": "uuid-do-cliente",
   "usuarioId": "uuid-do-usuario"
 }
 ```
+</details>
 
 ---
 
@@ -384,7 +430,9 @@ Authorization: Bearer <seu_token>
 | `PUT` | `/itens/{id}` | Autenticado | Atualiza um item de pedido |
 | `DELETE` | `/itens/{id}` | Autenticado | Remove um item de pedido |
 
-**Body — `ItemPedidoRequestDto`:**
+<details>
+<summary><strong>Ver exemplo de body</strong></summary>
+
 ```json
 {
   "pedidoId": "uuid-do-pedido",
@@ -392,6 +440,7 @@ Authorization: Bearer <seu_token>
   "quantidade": 2
 }
 ```
+</details>
 
 ---
 
@@ -399,46 +448,65 @@ Authorization: Bearer <seu_token>
 
 A aplicação utiliza **Spring Security** com autenticação **stateless** baseada em **JWT**.
 
-### Fluxo de autenticação
+### Fluxo de Autenticação
 
 ```
-Cliente → POST /auth/login → [Spring Security valida credenciais]
-       ← token JWT ←
-
-Cliente → GET /produtos (Authorization: Bearer <token>)
-       → [JwtAuthenticationFilter valida o token]
-       → [SecurityContext populado com usuário autenticado]
-       ← resposta ←
+  ┌──────────┐                            ┌─────────────────┐
+  │  Cliente │                            │   Servidor API  │
+  └────┬─────┘                            └────────┬────────┘
+       │                                           │
+       │  POST /auth/login {email, senha}          │
+       │ ──────────────────────────────────────>  │
+       │                                           │  Valida credenciais
+       │         { "token": "eyJhbG..." }          │  Gera JWT (HS256)
+       │ <──────────────────────────────────────  │
+       │                                           │
+       │  GET /produtos                            │
+       │  Authorization: Bearer eyJhbG...          │
+       │ ──────────────────────────────────────>  │
+       │                                           │  JwtAuthenticationFilter
+       │                                           │  valida token
+       │         [ lista de produtos ]             │  popula SecurityContext
+       │ <──────────────────────────────────────  │
+  ┌────┴─────┐                            ┌────────┴────────┐
+  │  Cliente │                            │   Servidor API  │
+  └──────────┘                            └─────────────────┘
 ```
 
-### Papéis (Roles)
+### Papéis (Roles) e Permissões
 
-| Role | Permissões |
+| Role | 👤 Usuários | 🧑 Clientes | 📦 Produtos | 🧾 Pedidos | 🧩 Itens |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **ADMIN** | ✅ CRUD | ✅ CRUD | ✅ CRUD | ✅ Ler/Criar/Cancelar | ✅ CRUD |
+| **VENDEDOR** | ❌ | ✅ CRUD | 👁️ Leitura + Estoque | ✅ Criar/Cancelar | ✅ CRUD |
+
+### Token JWT
+
+| Propriedade | Valor |
 |---|---|
-| **ADMIN** | Acesso total: gerenciar usuários, produtos, clientes, pedidos e itens |
-| **VENDEDOR** | Criar pedidos, gerenciar clientes e itens de pedido, consultar produtos |
+| Algoritmo | `HS256` (HMAC-SHA256) |
+| Expiração padrão | `86400000 ms` (24 horas) |
+| Header HTTP | `Authorization: Bearer <token>` |
 
-### Detalhes do Token JWT
-
-| Propriedade | Valor padrão |
-|---|---|
-| Algoritmo | HS256 (HMAC-SHA256) |
-| Expiração | 86400000 ms (24 horas) |
-| Header | `Authorization: Bearer <token>` |
-
-As senhas são armazenadas de forma segura utilizando o algoritmo de hash **BCrypt**.
+> 🔐 As senhas são armazenadas de forma segura com o algoritmo de hash **BCrypt**.
 
 ---
 
 ## 🎯 Objetivo do Projeto
 
-Este projeto tem como objetivo praticar o desenvolvimento de **APIs REST com Spring Boot**, aplicando boas práticas de:
+Este projeto foi desenvolvido com o objetivo de praticar e consolidar habilidades no desenvolvimento de **APIs REST com Spring Boot**, aplicando as seguintes boas práticas:
 
-- **Arquitetura em camadas** (inspirada em Clean Architecture)
-- **Segurança** com Spring Security e JWT
-- **Persistência** com Spring Data JPA e PostgreSQL
-- **Organização de código** com separação de responsabilidades (controllers, services, repositories, DTOs)
-- **Validação de dados** com Jakarta Bean Validation
-- **Controle de acesso** baseado em papéis (RBAC)
+- ✅ **Arquitetura em camadas** inspirada em Clean Architecture
+- ✅ **Segurança** robusta com Spring Security e JWT
+- ✅ **Persistência** eficiente com Spring Data JPA e PostgreSQL
+- ✅ **Separação de responsabilidades** (Controllers → Services → Repositories → DTOs)
+- ✅ **Validação de dados** com Jakarta Bean Validation
+- ✅ **Controle de acesso** granular baseado em papéis (RBAC)
+- ✅ **Documentação automática** da API com SpringDoc/Swagger
+- ✅ **Tratamento centralizado de erros** com `@RestControllerAdvice`
 
-> 📌 Projeto desenvolvido com fins de aprendizado e aprimoramento de habilidades em desenvolvimento Back-End com o ecossistema Spring.
+---
+
+<p align="center">
+  📌 <em>Projeto desenvolvido com fins de aprendizado e aprimoramento de habilidades em desenvolvimento Back-End com o ecossistema Spring.</em>
+</p>
